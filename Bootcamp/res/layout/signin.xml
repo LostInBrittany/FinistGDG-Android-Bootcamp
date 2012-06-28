@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SIGNIN"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:text="@string/signup_name"
+        android:textSize="20dip" />
+
+    <EditText
+        android:id="@+id/signin_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dip"
+        android:text="@string/signup_pwd"
+        android:textSize="20dip" />
+
+    <EditText
+        android:id="@+id/signin_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="16"
+        android:inputType="textPassword" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:id="@+id/signin_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signin_connect" 
+            android:layout_alignParentLeft="true"/>
+
+        <Button
+            android:id="@+id/signin_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Créer un compte" 
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

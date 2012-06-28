@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, BootcampActivity!</string>
+    <string name="app_name">Bootcamp</string>
+    <string name="signup_pwd">Votre password</string>
+    <string name="signup_name">Votre login</string>
+    <string name="signin_connect">Connexion</string>
+    <string name="main_send">Envoyer</string>
+
+</resources>
