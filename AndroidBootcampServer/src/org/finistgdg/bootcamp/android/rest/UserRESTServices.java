@@ -67,7 +67,7 @@ public class UserRESTServices {
 			throw new WebApplicationException(response);
 		}
 		logger.info("User signed-up");
-		return("O.K.\n");
+		return("{\"result\":\"O.K.\"}");
 	}
 	
 	private String signIn(String username, String password){	
@@ -90,7 +90,7 @@ public class UserRESTServices {
 			throw new WebApplicationException(response);
 		}
 		logger.info("User signed-up");
-		return "\"token\":\""+key+"\"";
+		return "{\"token\":\""+key+"\"}";
 	}
 
 	@GET

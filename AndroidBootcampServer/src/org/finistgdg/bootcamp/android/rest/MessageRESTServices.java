@@ -81,7 +81,7 @@ public class MessageRESTServices {
 				throw new WebApplicationException(response);
 			}
 			logger.info("Message added");
-			return("\"result\":\"ok\", \"timestamp\":"+timestamp+"\n");
+			return("{\"result\":\"ok\", \"timestamp\":"+timestamp+"}");
 	}
 	
 	@GET
