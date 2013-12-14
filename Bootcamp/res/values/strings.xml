@@ -7,5 +7,6 @@
     <string name="signup_name">Votre login</string>
     <string name="signin_connect">Connexion</string>
     <string name="main_send">Envoyer</string>
+    <string name="usePhoto">Select photo</string>
 
 </resources>

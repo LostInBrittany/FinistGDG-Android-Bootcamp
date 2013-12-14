@@ -13,15 +13,23 @@ import org.finistgdg.bootcamp.android.restrequest.RequestRunnable;
 
 import org.finistgdg.bootcamp.android.activities.R;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,7 +39,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-	//Defining Tweet adapter which will handle data of ListView
+    private static final int RESULT_LOAD_IMAGE = 345678;
+    //Defining Tweet adapter which will handle data of ListView
 	private TweetListAdapter adapter;
 
 	//TimerTask for scanning
@@ -50,7 +59,11 @@ public class MainActivity extends Activity implements OnClickListener {
 	//request server object
 	private RequestMaker req = null;
 
-	/**
+
+
+    private String picturePath;
+
+    /**
 	 * Handler that gets reqCode from the thread
 	 * 		use on send message
 	 */
@@ -73,7 +86,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.main);
 		_context = this;
 		adapter = new TweetListAdapter(getApplicationContext(), mTweets);
@@ -91,6 +103,46 @@ public class MainActivity extends Activity implements OnClickListener {
 		sendBtn = (Button) findViewById(R.id.main_send);
 		sendBtn.setOnClickListener(this); 
 	}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.photo:
+                Intent i = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                startActivityForResult(i, RESULT_LOAD_IMAGE);                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            picturePath = cursor.getString(columnIndex);
+            cursor.close();
+        }
+    }
 
 
 	/**
